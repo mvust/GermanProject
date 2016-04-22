@@ -1,0 +1,15 @@
+@using System.Collections.Generic
+@using System.Threading.Tasks
+@model System.Collections.Generic.IEnumerable<Result>
+@{
+    ViewData["Title"] = "Results";
+}
+
+<div>
+    @foreach (var results in Model)
+    {
+        <label>Correct: @results.Correct</label>
+        <label>Wrong: @results.Wrong</label>
+    }
+    
+</div>
