@@ -1,0 +1,24 @@
+@using System.Threading.Tasks
+@using Microsoft.ApplicationInsights.Extensibility
+@model IEnumerable<Chapter>
+@{
+    ViewData["Title"] = "Chapters";
+}
+
+<br>
+<br>
+<br>
+<div class="container-fluid">
+    <h2>Select the Chapter!</h2>
+    <div class="btn-group-vertical btn-group-lg">
+        @foreach (var chapter in Model)
+        {
+            <div class="row">
+                <button class="btn" btn-primary col-md-3">Chapter @chapter.ChapterId: @chapter.ChapterName</button>
+                <a href="/Home/Review/?chapter=@chapter.ChapterId" class="btn btn-primary">Review</a>
+                <a href="/Home/Quiz/?chapter=@chapter.ChapterId" class="btn btn-primary">Take Quiz!</a>
+            </div>
+            <br>
+        }
+    </div>
+</div>

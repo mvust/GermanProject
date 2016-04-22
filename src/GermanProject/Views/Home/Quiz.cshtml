@@ -1,0 +1,85 @@
+@model List<VocabWord>
+@{
+    ViewData["Title"] = "Quiz";
+}
+
+<br>
+<br>
+<br>
+<div>
+    <form class="form-horizonal" role="form">
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[0].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer1" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[1].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer2" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[2].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer3" type="text" class="form-control" id="3">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[3].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer4" type="text" class="form-control" id="4">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[4].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer5" type="text" class="form-control" id="5">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[5].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer6" type="text" class="form-control" id="6">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[6].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer7" type="text" class="form-control" id="7">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[7].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer8" type="text" class="form-control" id="8">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[8].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer9" type="text" class="form-control" id="9">
+        </div>
+        <div class="form-group">
+            <h3><span class="label label-default">@Model[9].Word</span></h3>
+        </div>
+        <div class="form-group">
+            <label for="definition">Definition:</label>
+            <input asp-for ="Answer10" type="text" class="form-control" id="10">
+        </div>
+        <div>
+            <input type="submit" value="Submit" class="btn-success" />
+        </div>
+    </form>
+ </div>

@@ -1,0 +1,25 @@
+@using System.Threading.Tasks
+@using Microsoft.ApplicationInsights.Extensibility
+@model IEnumerable<VocabWord>
+@{
+    ViewData["Title"] = "Review";
+}
+
+<br>
+<br>
+<br>
+<br>
+
+@foreach (var word in Model)
+{
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Word: @word.Word</h3>
+            </div>
+            <div class="panel-body">
+                Definition: @word.Definition
+            </div>
+        </div>
+    </div>
+}
