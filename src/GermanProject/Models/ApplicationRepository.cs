@@ -76,17 +76,25 @@ namespace GermanProject.Models
 
         public void UpdateResult(string user, int chapter, int correct, int wrong)
         {
-            if (_context.Results.Any(r => r.UserName == user && r.ChapterId == chapter))
+            if (GetResultbyUserAndChapter(user, chapter) != null)
             {
-                var result = GetResultbyUserAndChapter(user, chapter);
-                result.Correct = correct;
-                result.Wrong = wrong;
-                _context.SaveChanges();
+                try
+                {
+                    var result = GetResultbyUserAndChapter(user, chapter);
+                    result.Correct = correct;
+                    result.Wrong = wrong;
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Could not update result", ex);
+                }
             }
             else
             {
                 AddResult(user, chapter, correct, wrong);
             }
+
         }
 
         public void AddResult(string user, int chapter, int correct, int wrong)
@@ -102,6 +110,7 @@ namespace GermanProject.Models
                 };
 
                 _context.Add(newResult);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
