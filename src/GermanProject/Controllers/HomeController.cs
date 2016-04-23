@@ -1,4 +1,5 @@
-﻿using GermanProject.Models;
+﻿using System;
+using GermanProject.Models;
 using GermanProject.ViewModels.Home;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
@@ -35,8 +36,8 @@ namespace GermanProject.Controllers
         [HttpGet]
         public IActionResult Quiz(int chapter)
         {
-            var quiz = _repository.GetAllVocabByChapter(chapter);
-            return View(quiz);
+            ViewData["VocabWords"] = _repository.GetAllVocabByChapter(chapter);
+            return View();
         }
 
         [HttpPost]
@@ -48,7 +49,7 @@ namespace GermanProject.Controllers
                 var correct = 0;
                 var wrong = 0;
                 
-                if (answers[0].Definition == quiz.Answer1)
+                if (answers[0].Definition.Equals(quiz.Answer1, StringComparison.OrdinalIgnoreCase))
                 {
                     correct++;
                 }
@@ -57,93 +58,92 @@ namespace GermanProject.Controllers
                     wrong++;
                 }
 
-                if (answers[1].Definition == quiz.Answer2)
+                if (answers[1].Definition.Equals(quiz.Answer2, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
-                if (answers[2].Definition == quiz.Answer3)
+                if (answers[2].Definition.Equals(quiz.Answer3, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
-                if (answers[3].Definition == quiz.Answer4)
+                if (answers[3].Definition.Equals(quiz.Answer4, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
-                if (answers[4].Definition == quiz.Answer5)
+                if (answers[4].Definition.Equals(quiz.Answer5, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
-                if (answers[5].Definition == quiz.Answer6)
+                if (answers[5].Definition.Equals(quiz.Answer6, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
-                if (answers[6].Definition == quiz.Answer7)
+                if (answers[6].Definition.Equals(quiz.Answer7, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
-                if (answers[7].Definition == quiz.Answer8)
+                if (answers[7].Definition.Equals(quiz.Answer8, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
 
-                if (answers[8].Definition == quiz.Answer9)
+                if (answers[8].Definition.Equals(quiz.Answer9, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
-                if (answers[9].Definition == quiz.Answer10)
+                if (answers[9].Definition.Equals(quiz.Answer10, StringComparison.OrdinalIgnoreCase))
                 {
-                    correct = correct + 1;
+                    correct++;
                 }
                 else
                 {
-                    wrong = wrong + 1;
+                    wrong++;
                 }
 
                 _repository.UpdateResult(User.Identity.Name, quiz.Chapter, correct, wrong);
                 return RedirectToAction("Results", "Home");
             }
 
-            // If we got this far, something failed, redisplay form
             return View();
         }
 
