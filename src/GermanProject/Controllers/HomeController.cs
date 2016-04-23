@@ -1,8 +1,7 @@
 ﻿using GermanProject.Models;
-using GermanProject.ViewModels.Manage;
+using GermanProject.ViewModels.Home;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace GermanProject.Controllers
 {
@@ -45,7 +44,7 @@ namespace GermanProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var answers = _repository.GetAllVocabByChapter(1);
+                var answers = _repository.GetAllVocabByChapter(quiz.Chapter);
                 var correct = 0;
                 var wrong = 0;
                 
@@ -140,7 +139,7 @@ namespace GermanProject.Controllers
                     wrong = wrong + 1;
                 }
 
-                _repository.UpdateResult(User.Identity.Name, 1, correct, wrong);
+                _repository.UpdateResult(User.Identity.Name, quiz.Chapter, correct, wrong);
                 return RedirectToAction("Results", "Home");
             }
 
@@ -151,9 +150,7 @@ namespace GermanProject.Controllers
         [Authorize]
         public IActionResult Results()
         {
-            var user = User.Identity.Name;
-            var result = _repository.GetResultbyUserAndChapter(user, 1);
-            return View(result);
+            return View(_repository.GetResultbyUser(User.Identity.Name));
         }
 
         public IActionResult About()
