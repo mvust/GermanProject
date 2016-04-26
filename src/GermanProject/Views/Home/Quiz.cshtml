@@ -1,85 +1,32 @@
-@model List<VocabWord>
+@model GermanProject.ViewModels.Home.QuizViewModel
 @{
     ViewData["Title"] = "Quiz";
+    var vocabWords = (List<VocabWord>)ViewData["VocabWords"];
 }
 
 <br>
 <br>
-<br>
 <div>
-    <form class="form-horizonal" role="form">
+    <form class="form-horizonal" role="form" method="post">
         <div class="form-group">
-            <h3><span class="label label-default">@Model[0].Word</span></h3>
+            <h2>
+                <span class="label label-info">Chapter @vocabWords[0].ChapterId Quiz</span></h2>
         </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer1" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[1].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer2" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[2].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer3" type="text" class="form-control" id="3">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[3].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer4" type="text" class="form-control" id="4">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[4].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer5" type="text" class="form-control" id="5">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[5].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer6" type="text" class="form-control" id="6">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[6].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer7" type="text" class="form-control" id="7">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[7].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer8" type="text" class="form-control" id="8">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[8].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer9" type="text" class="form-control" id="9">
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@Model[9].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label for="definition">Definition:</label>
-            <input asp-for ="Answer10" type="text" class="form-control" id="10">
-        </div>
+        @foreach (var word in vocabWords)
+        {
+            <div class="form-group">
+                <h3>
+                    <span class="label label-default">@word.Word</span></h3>
+            </div>
+            <div class="form-group">
+                <label>English:</label>
+                <input asp-for="Answer" type="text" class="form-control"/>
+                <span asp-validation-for="Answer" class="text-danger"></span>
+            </div>
+        }
         <div>
-            <input type="submit" value="Submit" class="btn-success" />
+            <input type="submit" value="Submit" class="btn btn-success"/>
         </div>
     </form>
- </div>
+
+</div>

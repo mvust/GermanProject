@@ -44,6 +44,20 @@ namespace GermanProject.Models
             }
         }
 
+        public List<Result> GetResultbyUser(string user)
+        {
+            try
+            {
+                return _context.Results
+                    .Where(r => r.UserName == user)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not get result from database by user and chapter", ex);
+                return null;
+            }
+        }
         public Result GetResultbyUserAndChapter(string user, int chapter)
         {
             try
@@ -57,6 +71,30 @@ namespace GermanProject.Models
                 _logger.LogError("Could not get result from database by user and chapter", ex);
                 return null;
             }
+
+        }
+
+        public void UpdateResult(string user, int chapter, int correct, int wrong)
+        {
+            if (GetResultbyUserAndChapter(user, chapter) != null)
+            {
+                try
+                {
+                    var result = GetResultbyUserAndChapter(user, chapter);
+                    result.Correct = correct;
+                    result.Wrong = wrong;
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Could not update result", ex);
+                }
+            }
+            else
+            {
+                AddResult(user, chapter, correct, wrong);
+            }
+
         }
 
         public void AddResult(string user, int chapter, int correct, int wrong)
@@ -71,26 +109,12 @@ namespace GermanProject.Models
                     Wrong = wrong
                 };
 
-                _context.Results.Add(newResult);
+                _context.Add(newResult);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
                 _logger.LogError("Could not add result", ex);
-            }
-        }
-
-        public void UpdateResult(string user, int chapter, int correct, int wrong)
-        {
-            if (_context.Results.Any(r => r.UserName == user && r.ChapterId == chapter))
-            {
-                var result = GetResultbyUserAndChapter(user, chapter);
-                result.Correct = correct;
-                result.Wrong = wrong;
-                _context.SaveChanges();
-            }
-            else
-            {
-                AddResult(user, chapter, correct, wrong);
             }
         }
     }

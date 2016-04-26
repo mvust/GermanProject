@@ -1,8 +1,8 @@
-﻿using GermanProject.Models;
-using GermanProject.ViewModels.Manage;
+﻿using System;
+using GermanProject.Models;
+using GermanProject.ViewModels.Home;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace GermanProject.Controllers
 {
@@ -36,8 +36,8 @@ namespace GermanProject.Controllers
         [HttpGet]
         public IActionResult Quiz(int chapter)
         {
-            var quiz = _repository.GetAllVocabByChapter(chapter);
-            return View(quiz);
+            ViewData["VocabWords"] = _repository.GetAllVocabByChapter(chapter);
+            return View();
         }
 
         [HttpPost]
@@ -45,115 +45,33 @@ namespace GermanProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var answers = _repository.GetAllVocabByChapter(1);
+                var answers = _repository.GetAllVocabByChapter(quiz.Chapter);
                 var correct = 0;
                 var wrong = 0;
+
+                for (var i = 0; i < quiz.Answer.Count; i++)
+                {
+                    if (answers[i].Definition.Equals(quiz.Answer[i], StringComparison.OrdinalIgnoreCase))
+                    {
+                        correct++;
+                    }
+                    else
+                    {
+                        wrong++;
+                    }
+                }
                 
-                if (answers[0].Definition == quiz.Answer1)
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[1].Definition == quiz.Answer2)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                if (answers[2].Definition == quiz.Answer3)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                if (answers[3].Definition == quiz.Answer4)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                if (answers[4].Definition == quiz.Answer5)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                if (answers[5].Definition == quiz.Answer6)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                if (answers[6].Definition == quiz.Answer7)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                if (answers[7].Definition == quiz.Answer8)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-
-                if (answers[8].Definition == quiz.Answer9)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                if (answers[9].Definition == quiz.Answer10)
-                {
-                    correct = correct + 1;
-                }
-                else
-                {
-                    wrong = wrong + 1;
-                }
-
-                _repository.UpdateResult(User.Identity.Name, 1, correct, wrong);
+                _repository.UpdateResult(User.Identity.Name, quiz.Chapter, correct, wrong);
                 return RedirectToAction("Results", "Home");
             }
 
-            // If we got this far, something failed, redisplay form
             return View();
         }
 
         [Authorize]
         public IActionResult Results()
         {
-            var user = User.Identity.Name;
-            var result = _repository.GetResultbyUserAndChapter(user, 1);
-            return View(result);
+            return View(_repository.GetResultbyUser(User.Identity.Name));
         }
 
         public IActionResult About()
