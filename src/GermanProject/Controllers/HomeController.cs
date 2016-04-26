@@ -60,7 +60,7 @@ namespace GermanProject.Controllers
                         wrong++;
                     }
                 }
-
+                
                 _repository.UpdateResult(User.Identity.Name, quiz.Chapter, correct, wrong);
                 return RedirectToAction("Results", "Home");
             }
