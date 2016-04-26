@@ -48,100 +48,21 @@ namespace GermanProject.Controllers
                 var answers = _repository.GetAllVocabByChapter(quiz.Chapter);
                 var correct = 0;
                 var wrong = 0;
-                
-                if (answers[0].Definition.Equals(quiz.Answer1, StringComparison.OrdinalIgnoreCase))
+
+                for (var i = 0; i < quiz.Answer.Count; i++)
                 {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
+                    if (answers[i].Definition.Equals(quiz.Answer[i], StringComparison.OrdinalIgnoreCase))
+                    {
+                        correct++;
+                    }
+                    else
+                    {
+                        wrong++;
+                    }
                 }
 
-                if (answers[1].Definition.Equals(quiz.Answer2, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[2].Definition.Equals(quiz.Answer3, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[3].Definition.Equals(quiz.Answer4, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[4].Definition.Equals(quiz.Answer5, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[5].Definition.Equals(quiz.Answer6, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[6].Definition.Equals(quiz.Answer7, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[7].Definition.Equals(quiz.Answer8, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-
-                if (answers[8].Definition.Equals(quiz.Answer9, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-                if (answers[9].Definition.Equals(quiz.Answer10, StringComparison.OrdinalIgnoreCase))
-                {
-                    correct++;
-                }
-                else
-                {
-                    wrong++;
-                }
-
-               _repository.UpdateResult(User.Identity.Name, quiz.Chapter, correct, wrong);
-               return RedirectToAction("Results", "Home");
+                _repository.UpdateResult(User.Identity.Name, quiz.Chapter, correct, wrong);
+                return RedirectToAction("Results", "Home");
             }
 
             return View();

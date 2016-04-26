@@ -9,90 +9,24 @@
 <div>
     <form class="form-horizonal" role="form" method="post">
         <div class="form-group">
-            <h2><span class="label label-info">Chapter @vocabWords[0].ChapterId Quiz</span></h2>
+            <h2>
+                <span class="label label-info">Chapter @vocabWords[0].ChapterId Quiz</span></h2>
         </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[0].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer1" type="text" class="form-control"/>
-            <span asp-validation-for="Answer1" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[1].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer2" type="text" class="form-control"/>
-            <span asp-validation-for="Answer2" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[2].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer3" type="text" class="form-control"/>
-            <span asp-validation-for="Answer3" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[3].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer4" type="text" class="form-control"/>
-            <span asp-validation-for="Answer4" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[4].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer5" type="text" class="form-control"/>
-            <span asp-validation-for="Answer5" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[5].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer6" type="text" class="form-control"/>
-            <span asp-validation-for="Answer6" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[6].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer7" type="text" class="form-control"/>
-            <span asp-validation-for="Answer7" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[7].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer8" type="text" class="form-control"/>
-            <span asp-validation-for="Answer8" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[8].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer9" type="text" class="form-control"/>
-            <span asp-validation-for="Answer9" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <h3><span class="label label-default">@vocabWords[9].Word</span></h3>
-        </div>
-        <div class="form-group">
-            <label>English:</label>
-            <input asp-for="Answer10" type="text" class="form-control"/>
-            <span asp-validation-for="Answer10" class="text-danger"></span>
-        </div>
+        @foreach (var word in vocabWords)
+        {
+            <div class="form-group">
+                <h3>
+                    <span class="label label-default">@word.Word</span></h3>
+            </div>
+            <div class="form-group">
+                <label>English:</label>
+                <input asp-for="Answer" type="text" class="form-control"/>
+                <span asp-validation-for="Answer" class="text-danger"></span>
+            </div>
+        }
         <div>
             <input type="submit" value="Submit" class="btn btn-success"/>
         </div>
     </form>
- </div>
+
+</div>
