@@ -6,11 +6,11 @@ using Microsoft.AspNet.Mvc;
 
 namespace GermanProject.Controllers
 {
-    public class HomeController : Controller
+    public class AppController : Controller
     {
         private readonly IApplicationRepository _repository;
 
-        public HomeController(IApplicationRepository repository)
+        public AppController(IApplicationRepository repository)
         {
             _repository = repository;
         }
@@ -62,7 +62,7 @@ namespace GermanProject.Controllers
                 }
                 
                 _repository.UpdateResult(User.Identity.Name, quiz.Chapter, correct, wrong);
-                return RedirectToAction("Results", "Home");
+                return RedirectToAction("Results", "App");
             }
 
             return View();
@@ -71,7 +71,8 @@ namespace GermanProject.Controllers
         [Authorize]
         public IActionResult Results()
         {
-            return View(_repository.GetResultbyUser(User.Identity.Name));
+            var results = _repository.GetResultbyUser(User.Identity.Name);
+            return View(results);
         }
 
         public IActionResult About()

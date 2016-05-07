@@ -95,7 +95,7 @@ namespace GermanProject.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return RedirectToAction(nameof(AppController.Index), "Home");
                 }
                 AddErrors(result);
             }
@@ -112,7 +112,7 @@ namespace GermanProject.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(AppController.Index), "Home");
         }
 
         //
@@ -182,7 +182,7 @@ namespace GermanProject.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(AppController.Index), "Home");
             }
         }
 
