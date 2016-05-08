@@ -8,15 +8,15 @@
 <br>
 <br>
 <br>
-<div class="container-fluid">
+<div class="container-fluid col-md-6 col-md-offset-3">
     <h2>Select the Chapter!</h2>
     <div class="btn-group-vertical btn-group-lg">
         @foreach (var chapter in Model)
         {
             <div class="row">
-                <button class="btn" btn-primary col-md-3">Chapter @chapter.ChapterId: @chapter.ChapterName</button>
-                <a href="/Home/Review/?chapter=@chapter.ChapterId" class="btn btn-primary">Review</a>
-                <a href="/Home/Quiz/?chapter=@chapter.ChapterId" class="btn btn-primary">Take Quiz!</a>
+                <button class="myButton btn">Chapter @chapter.ChapterId: @chapter.ChapterName</button>
+                <a href="/App/Review/?chapter=@chapter.ChapterId" class="btn btn-primary">Review</a>
+                <a href="/App/Quiz/?chapter=@chapter.ChapterId" class="btn btn-primary">Take Quiz!</a>
             </div>
             <br>
         }

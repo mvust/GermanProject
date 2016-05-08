@@ -71,7 +71,7 @@ namespace GermanProject
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/App/Error");
 
                 // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
                 try
@@ -98,7 +98,7 @@ namespace GermanProject
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseMvc(routes => { routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"); });
+            app.UseMvc(routes => { routes.MapRoute("default", "{controller=App}/{action=Index}/{id?}"); });
         }
 
         // Entry point for the application.
