@@ -33,6 +33,7 @@ namespace GermanProject.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public IActionResult Quiz(int chapter)
         {
             ViewData["VocabWords"] = _repository.GetAllVocabByChapter(chapter);
