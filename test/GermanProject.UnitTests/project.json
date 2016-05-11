@@ -1,0 +1,35 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "GermanProject Unit Tests",
+  "authors": [ "Martin Vust" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "System.Collections": "4.0.10-beta-23109",
+    "System.Linq": "4.0.0-beta-23109",
+    "System.Threading": "4.0.10-beta-23109",
+    "System.Runtime": "4.0.10-beta-23109",
+    "Microsoft.CSharp": "4.0.0-beta-23109",
+    "xunit.runner.dnx": "2.1.0-*",
+    "xunit": "2.1.0-*",
+    "GermanProject": "1.0.0-*"
+  },
+
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
+
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.0-beta-22816",
+        "System.Collections": "4.0.10-beta-22816",
+        "System.Linq": "4.0.0-beta-22816",
+        "System.Threading": "4.0.10-beta-22816"
+      }
+    }
+  }
+}
